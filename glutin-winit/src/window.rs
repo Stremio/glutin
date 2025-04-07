@@ -47,12 +47,12 @@ pub trait GlWindow {
     );
 }
 
-impl GlWindow for Window {
+impl GlWindow for dyn Window {
     fn build_surface_attributes(
         &self,
         builder: SurfaceAttributesBuilder<WindowSurface>,
     ) -> Result<SurfaceAttributes<WindowSurface>, HandleError> {
-        let (w, h) = self.inner_size().non_zero().expect("invalid zero inner size");
+        let (w, h) = self.outer_size().non_zero().expect("invalid zero inner size");
         let handle = self.window_handle()?.as_raw();
         Ok(builder.build(handle, w, h))
     }
@@ -62,7 +62,7 @@ impl GlWindow for Window {
         surface: &Surface<impl SurfaceTypeTrait + ResizeableSurface>,
         context: &PossiblyCurrentContext,
     ) {
-        if let Some((w, h)) = self.inner_size().non_zero() {
+        if let Some((w, h)) = self.outer_size().non_zero() {
             surface.resize(context, w, h)
         }
     }
