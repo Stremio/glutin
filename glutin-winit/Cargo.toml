@@ -21,7 +21,7 @@ wayland = ["glutin/wayland", "winit/wayland"]
 [dependencies]
 glutin = { version = "0.32.0", path = "../glutin", default-features = false }
 raw-window-handle = "0.6"
-winit = { git = "https://github.com/tymmesyde/winit" }
+winit = { git = "https://github.com/Stremio/winit" }
 
 [build-dependencies]
 cfg_aliases = "0.2.1"
